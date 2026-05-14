@@ -1,0 +1,194 @@
+
+// export const cocktails = [
+
+//     {
+//         id: 1,
+//         nom: "Woo woo",
+//         type: "Alcoolisé",
+//         ingredients: [
+//             "Vodka",
+//             "Schnaps à la pêche",
+//             "Jus de canneberge", "Jus de citron vert","Eau gazeuse"
+//         ],
+//         prix: 15.50,
+//         image: "images/woo_woo.png"
+//     },
+//     {
+//         id: 2,
+//         nom: "Piña Colada",
+//         type: "Alcoolisé",
+//         ingredients: [
+//             "Rhum",
+//             "Crème de coco",
+//             "Jus d'ananas"
+//         ],
+//         prix: 10.00,
+//         image: "images/pina_colada.png"
+//     },
+//     {
+//         id: 3,
+//         nom: "Purple Rain",
+//         type: "Alcoolisé",
+//         ingredients: [
+//             "Bleu curaçao", "Grenadine",
+//             "Jus de citron vert", "Vodka"
+//         ],
+//         prix: 14.00,
+//         image: "images/purple_rain.png"
+//     },
+//     {
+//         id: 4,
+//         nom: "Limoncello",
+//         type: "Alcoolisé",
+//         ingredients: [
+//             "Vodka", "Lemon wedge",
+//             "Sucre en poudre",  "Limoncello",
+//             "Jus de citron vert"
+//         ],
+//         prix: 10.00,
+//         image: "images/limoncello.png"
+//     },
+//     {
+//         id: 5,
+//         nom: "Pomegranate Fizz",
+//         type: "Sans alcool",
+//         ingredients: [
+//             "Pink gin", "Pomegrenade shrub",  "Sucre en poudre",
+//             "Sparkling rosé wine",  "Pomegranate seeds"
+//         ],
+//         prix: 10.00,
+//         image: "images/pommegranate_fizz.png"
+//     },
+//     {
+//         id: 6,
+//         nom: "Paloma Cocktail",
+//         type: "Alcoolisé",
+//         ingredients: [
+//             "Rhum", "1 lime",
+//             "Sel marin en flocons",
+//             "Blanco tequila",
+//             "Pink grapefruit juice",
+//             "Agave syrup",
+//             "Ice cubes",
+//             "Sparkling water",
+//             "Wedge of grapefruit"
+//         ],
+//         prix: 15.00,
+//         image: "images/paloma_cocktail.png"
+//     },
+//     {
+//         id: 7,
+//         nom: "Framboise Daiquiri",
+//         type: "Alcoolisé",
+//         ingredients: [
+//             "Rhum blanc",
+//             "Jus de citron vert",
+//             "Framboises",
+//             "Sucre en poudre"
+//         ],
+//         prix: 8.00,
+//         image: "images/Raspberry daiquiri.png"
+//     },
+//     {
+//         id: 8,
+//         nom: "Zombie",
+//         type: "Alcoolisé",
+//         ingredients: [
+//             "Rhum blanc",
+//             "Rhum brun",
+//             "Rhum à fort degré d'alcool",
+//             "Jus de citron vert",
+//             "Pernod",
+//             "Jus d'ananas",
+//             "Angostura bitters",
+//             "Café de grenadine",
+//             "Brins de menthe",
+//             "Cerises",
+//             "Quartiers d'orange"
+//         ],
+//         prix: 20.00,
+//         image: "images/zombie.png"
+//     }
+// ];
+ 
+
+
+
+/**
+ * Module Cocktail.js
+ * Classe représentant un cocktail avec encapsulation (attributs privés).
+ */
+export class Cocktail {
+    // Déclaration des attributs privés (Encapsulation)
+    #id;
+    #nom;
+    #type;
+    #ingredients;
+    #prix;
+    #image;
+
+    /**
+     * @param {number} id 
+     * @param {string} nom 
+     * @param {string} type 
+     * @param {Array} ingredients 
+     * @param {number} prix 
+     * @param {string} image 
+     */
+    constructor(id, nom, type, ingredients, prix, image) {
+        this.#id = id;
+        this.#nom = nom;
+        this.#type = type;
+        this.#ingredients = ingredients;
+        this.#prix = prix;
+        this.#image = image;
+    }
+
+    // --- ACCESSEURS (Getters) ---
+    get id() { return this.#id; }
+    get nom() { return this.#nom; }
+    get type() { return this.#type; }
+    get ingredients() { return this.#ingredients; }
+    get prix() { return this.#prix; }
+    get image() { return this.#image; }
+
+    // --- MUTATEURS (Setters) ---
+    set id(valeur) { this.#id = valeur; }
+    set nom(valeur) { this.#nom = valeur; }
+    set type(valeur) { this.#type = valeur; }
+    set ingredients(valeur) { this.#ingredients = valeur; }
+    set prix(valeur) { this.#prix = valeur; }
+    set image(valeur) { this.#image = valeur; }
+
+    /**
+     * Retourne une carte Bootstrap (Card) avec les données du cocktail.
+    @returns {string} Le code HTML de la carte.
+     */
+    obtenirCardCocktail() {
+        // Transformation du tableau d'ingrédients en chaîne lisible séparée par des virgules
+        const listeIngredients = this.#ingredients.join(', ');
+
+        return `
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="position-relative">
+                        <img src="${this.#image}" class="card-img-top" alt="${this.#nom}" style="height: 200px; object-fit: cover;">
+                        <span class="position-absolute top-0 end-0 badge m-2 ${this.#type === 'Alcoolisé' ? 'bg-danger' : 'bg-success'}">
+                            ${this.#type}
+                        </span>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">${this.#id} - ${this.#nom}</h5>
+                        <p class="card-text mb-2">
+                            <small class="text-muted"><strong>Ingrédients :</strong> ${listeIngredients}</small>
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-auto">
+                            <span class="h5 mb-0 fw-bold">${parseFloat(this.#prix).toFixed(2)} $</span>
+                            <button class="btn btn-outline-primary btn-sm">Détails</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
