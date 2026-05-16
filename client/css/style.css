@@ -1,10 +1,24 @@
-/* Variables de couleurs pour un thème cohérent */
+/* ================================================
+   VARIABLES & BASE
+   ================================================ */
 :root {
-    --bourgogne: #800020;
-    --brun-fonce: #3e2723;
-    --brun-pale: #f5efe6;
-    --blanc: #ffffff;
-    --ombre: rgba(0, 0, 0, 0.1);
+    --creme:       #f5ede0;
+    --bordeaux:    #8b1a1a;
+    --bordeaux-dk: #6b1212;
+    --card-bg:     #ffffff;
+    --texte:       #1a1a1a;
+    --texte-doux:  #555555;
+    --accent:      #c0392b;
+    --rayon:       14px;
+    --ombre:       0 4px 18px rgba(0,0,0,0.09);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -12,116 +26,311 @@ html {
 }
 
 body {
-    background-color: var(--brun-pale);
-    color: var(--brun-fonce);
-    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background-color: var(--creme);
+    color: var(--texte);
     line-height: 1.6;
+    min-height: 100vh;
 }
 
-/* NAV Bar ── */
-.barre-navigation {
-    background-color: #921414;
-    border: 15px solid #78171786;
+/* ================================================
+   NAVBAR
+   ================================================ */
+.navbar {
+    background-color: var(--bordeaux) !important;
+    padding: 0.75rem 1.5rem;
+    gap: 0.5rem;
+}
+
+.navbar-brand {
+    font-size: 1.2rem;
+    letter-spacing: 0.03em;
+    color: #fff !important;
+}
+
+/* Tous les boutons de la navbar */
+.navbar .btn {
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
     border-radius: 8px;
-    box-shadow: 0 2px 6px var(--ombre);
+    letter-spacing: 0.01em;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    white-space: nowrap;
 }
 
-/*  Boutons   */
-.btn {
-    border-radius: 8px;
-    font-size: 0.99rem;
-    font-weight: 500;
-    
-    transition: opacity 0.2s ease, transform 0.15s ease;
-
-}
-
-.barre-navigation .btn {
-    background-color: #ffc107; 
-    border-color: #ffc107;
-    color: #000; 
-}
-
-.barre-navigation .btn:hover {
-    background-color: #e0a800;
-    border-color: #d39e00;
-}
-
-.btn:hover {
-    opacity: 0.88;
+.navbar .btn:hover {
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
-.btn-warning {
-    color: var(--brun-fonce);
+/* Lister — bleu */
+#btn-lister {
+    background-color: #2980b9;
+    border-color: #2980b9;
+    color: #fff;
+}
+#btn-lister:hover {
+    background-color: #1a6fa0;
+    border-color: #1a6fa0;
+    color: #fff;
 }
 
-/* ── Zone de saisie── */
-#zoneSaisie .card {
-    border: 1px solid #7b0e0e9c;
+/* Par ingrédient — gris foncé */
+.navbar .dropdown:nth-of-type(1) > .dropdown-toggle {
+    background-color: #555;
+    border-color: #555;
+    color: #fff;
+}
+.navbar .dropdown:nth-of-type(1) > .dropdown-toggle:hover {
+    background-color: #3a3a3a;
+    border-color: #3a3a3a;
+    color: #fff;
+}
+
+/* Entre 2 prix — vert */
+.navbar .dropdown:nth-of-type(2) > .dropdown-toggle {
+    background-color: #27ae60;
+    border-color: #27ae60;
+    color: #fff;
+}
+.navbar .dropdown:nth-of-type(2) > .dropdown-toggle:hover {
+    background-color: #1e8449;
+    border-color: #1e8449;
+    color: #fff;
+}
+
+/* Par id — rose/rouge */
+.navbar .dropdown:nth-of-type(3) > .dropdown-toggle {
+    background-color: #c0392b;
+    border-color: #c0392b;
+    color: #fff;
+}
+.navbar .dropdown:nth-of-type(3) > .dropdown-toggle:hover {
+    background-color: #a93226;
+    border-color: #a93226;
+    color: #fff;
+}
+
+/* Par nom — jaune/doré */
+.navbar .dropdown:nth-of-type(4) > .dropdown-toggle {
+    background-color: #f39c12;
+    border-color: #f39c12;
+    color: #fff;
+}
+.navbar .dropdown:nth-of-type(4) > .dropdown-toggle:hover {
+    background-color: #d68910;
+    border-color: #d68910;
+    color: #fff;
+}
+
+/* Enlever la flèche dropdown par défaut */
+.navbar .dropdown-toggle::after {
+    display: none;
+}
+
+/* Menu déroulant */
+.dropdown-menu {
+    border: none;
+    border-radius: var(--rayon);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+    padding: 1rem;
+    background-color: #fff;
+}
+
+.dropdown-menu .form-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--texte-doux);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 0.4rem;
+}
+
+.dropdown-menu .form-control {
     border-radius: 8px;
-    background-color: var(--blanc);
+    border: 1.5px solid #ddd;
+    font-size: 0.875rem;
+    transition: border-color 0.2s;
 }
 
+.dropdown-menu .form-control:focus {
+    border-color: var(--bordeaux);
+    box-shadow: 0 0 0 3px rgba(139,26,26,0.12);
+}
 
+.dropdown-menu .btn {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+}
 
+/* Select — Trier par */
+#select-tri {
+    background-color: #fff;
+    border: 1.5px solid rgba(255,255,255,0.4);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--texte);
+    padding: 0.4rem 2rem 0.4rem 0.75rem;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-width: 140px;
+}
+
+#select-tri:focus {
+    outline: none;
+    border-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255,255,255,0.3);
+}
+
+/* ================================================
+   EN-TÊTE
+   ================================================ */
+header {
+    background-color: var(--creme) !important;
+    border-bottom: 1px solid rgba(0,0,0,0.08) !important;
+}
+
+header h1 {
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 800;
+    color: var(--texte);
+    letter-spacing: -0.02em;
+}
+
+header p {
+    font-size: 0.95rem;
+}
+
+/* ================================================
+   GRILLE DE CARDS
+   ================================================ */
+main {
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+/* ================================================
+   CARD COCKTAIL
+   ================================================ */
 .card {
     border: none;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px var(--ombre);
-    background-color: var(--blanc);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border-radius: var(--rayon);
+    box-shadow: var(--ombre);
+    background-color: var(--card-bg);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
     overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 32px rgba(0,0,0,0.14);
 }
 
-/* ── IMAGE ── */
+/* Image de la card */
 .card-img-top {
-    height: 200px;
+    height: 220px;
     object-fit: cover;
-    border-bottom: 2px solid var(--brun-pale);
-    display: block;
+    border-radius: 0;
     width: 100%;
 }
 
-/* Body */
 .card-body {
-    padding: 0.9rem 1rem 1rem;
+    padding: 1rem 1.1rem 1.2rem;
 }
 
+/* Titre de la card */
 .card-title {
-    color: var(--bourgogne);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--bordeaux);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+/* Badge type */
+.card-text .badge {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    padding: 0.3em 0.65em;
+    border-radius: 6px;
+}
+
+.badge.bg-secondary {
+    background-color: #e8e0d5 !important;
+    color: #5a4a3a !important;
+}
+
+/* Ingrédients */
+.card-text strong {
     font-weight: 700;
-    font-size: 0.95rem;
-    margin-bottom: 0.4rem;
+    color: var(--texte);
+    font-size: 0.85rem;
 }
 
 .card-text {
-    font-size: 0.82rem;
-    margin-bottom: 0.25rem;
-    color: var(--brun-fonce);
+    font-size: 0.875rem;
+    color: var(--texte-doux);
+    line-height: 1.5;
 }
 
-.card-text.prix {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--bourgogne);
-    margin-top: 0.3rem;
+/* Prix */
+.card-text:last-child {
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.95rem;
 }
 
-.card-text.ingredients {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+/* ================================================
+   ÉTAT VIDE / SPINNER
+   ================================================ */
+#conteneur-cocktails .spinner-border {
+    color: var(--bordeaux) !important;
+    width: 2.5rem;
+    height: 2.5rem;
 }
 
-/* ── RESPONSIVEe ── */
-@media (max-width: 768px) {
-    .barre-navigation { gap: 8px !important; }
-    .btn { width: 100%; }
-    select.form-select { width: 100% !important; }
+.text-muted {
+    color: #999 !important;
+    font-size: 0.95rem;
+}
+
+/* ================================================
+   PIED DE PAGE
+   ================================================ */
+footer {
+    background-color: transparent;
+    border-top: 1px solid rgba(0,0,0,0.08) !important;
+    font-size: 0.8rem;
+    letter-spacing: 0.02em;
+    color: #aaa;
+}
+
+/* ================================================
+   RESPONSIVE — MOBILE
+   ================================================ */
+@media (max-width: 991.98px) {
+    .navbar-nav {
+        padding: 0.5rem 0;
+        gap: 0.4rem !important;
+    }
+
+    .navbar .btn,
+    #select-tri {
+        width: 100%;
+        text-align: left;
+    }
+
+    .dropdown-menu {
+        width: 100%;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .card-img-top {
+        height: 180px;
+    }
 }

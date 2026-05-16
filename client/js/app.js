@@ -1,15 +1,15 @@
- 
+
 import { obtenirCocktails }  from './modules/requetes.js';
 import { afficherCocktails } from './modules/affichage.js';
 import { Cocktail }          from './donnees/cocktails.js';
  
-
+ 
 let tabObjCocktails = [];
  
-// ─── Initialisation 
+// ─── Initialisation
  
 const initialiser = async () => {
-    
+   
     const listeCocktails = await obtenirCocktails();
  
     tabObjCocktails = listeCocktails.map(data => new Cocktail(data));
@@ -17,20 +17,28 @@ const initialiser = async () => {
     afficherCocktails(tabObjCocktails);
 };
  
-// ─── Lister tous les cocktails 
+// ─── Lister tous les cocktails
  
 window.lister = () => {
     afficherCocktails(tabObjCocktails);
 };
  
-// ─── Lister selon un ingrédient 
+// ─── Lister selon un ingrédient
  
 window.listerParIngredient = () => {
     const ingRecherche = prompt('Quel ingrédient cherchez-vous ?');
+ 
     if (ingRecherche) {
-        const resultats = tabObjCocktails.filter(c =>
-            c.ingredients.some(i => i.toLowerCase().includes(ingRecherche.toLowerCase()))
-        );
+        const recherche = ingRecherche.toLowerCase().trim();
+ 
+        const resultats = tabObjCocktails.filter(c => {
+            const ingredients = Array.isArray(c.ingredients)
+                ? c.ingredients.join(" ").toLowerCase()
+                : c.ingredients.toLowerCase();
+ 
+            return ingredients.includes(recherche);
+        });
+ 
         afficherCocktails(resultats);
     }
 };
@@ -57,7 +65,7 @@ window.listerEntreDeuxPrix = () => {
     afficherCocktails(resultats);
 };
  
-// ─── Chercher par ID 
+// ─── Chercher par ID
 window.chercherParId = () => {
     const idRecherche = prompt("Entrez l'ID du cocktail :");
     if (idRecherche) {
@@ -71,15 +79,19 @@ window.chercherParId = () => {
 // ─── Chercher par nom
 window.chercherParNom = () => {
     const nomRecherche = prompt('Entrez le nom du cocktail :');
+ 
     if (nomRecherche) {
+        const recherche = nomRecherche.toLowerCase().trim();
+ 
         const resultats = tabObjCocktails.filter(c =>
-            c.nom.toLowerCase().includes(nomRecherche.toLowerCase())
+            c.nom.toLowerCase().includes(recherche)
         );
+ 
         afficherCocktails(resultats);
     }
 };
  
-// ─── Trier les cocktails 
+// ─── Trier les cocktails
  
 window.trierCocktails = (critere) => {
     if (!critere) return;
@@ -92,9 +104,7 @@ window.trierCocktails = (critere) => {
     afficherCocktails(listeTriee);
 };
  
-// ─── Démarrage 
+// ─── Démarrage
  
 document.addEventListener('DOMContentLoaded', initialiser);
-
-
-
+ 

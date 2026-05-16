@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Cocktails</title>
+
+    <!-- Bootstrap CSS (local) -->
+    <link rel="stylesheet" href="utilitaires/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <!-- Bootstrap Icons (local) -->
+    <link rel="stylesheet" href="utilitaires/bootstrap-icons-1.8.1/font/bootstrap-icons.css">
+    <!-- Style personnalisé -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+
+     <!-- BARRE DE NAVIGATION -->
+    
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid">
+
+        <!-- Titre / Logo -->
+        <a class="navbar-brand fw-bold" href="#">
+            <i class="bi bi-cup-straw me-2"></i>Cocktails
+        </a>
+
+        
+        <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav align-items-lg-center gap-1 flex-wrap py-2 py-lg-0">
+
+                <!-- 1. Lister tous -->
+                <li class="nav-item">
+                    <button id="btn-lister" class="btn btn-outline-light btn-sm">
+                        <i class="bi bi-list-ul me-1"></i>Lister
+                    </button>
+                </li>
+
+                <!-- 2. Lister selon l'ingrédient -->
+                <li class="nav-item dropdown">
+                    <button class="btn btn-outline-info btn-sm dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-search me-1"></i>Par ingrédient
+                    </button>
+                    <div class="dropdown-menu p-3" style="min-width: 280px;">
+                        <label class="form-label fw-semibold">Ingrédient</label>
+                        <input type="text" id="input-ingredient"
+                            class="form-control form-control-sm mb-2"
+                            placeholder="ex: Rhum, Vodka...">
+                        <button id="btn-ingredient" class="btn btn-info btn-sm w-100">
+                            Rechercher
+                        </button>
+                    </div>
+                </li>
+
+                <!-- 3. Lister entre 2 prix -->
+                <li class="nav-item dropdown">
+                    <button class="btn btn-outline-warning btn-sm dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-cash me-1"></i>Entre 2 prix
+                    </button>
+                    <div class="dropdown-menu p-3" style="min-width: 280px;">
+                        <label class="form-label fw-semibold">Fourchette de prix ($)</label>
+                        <div class="d-flex gap-2 mb-2">
+                            <input type="number" id="input-prix-min"
+                                class="form-control form-control-sm"
+                                placeholder="Min" min="0" step="0.50">
+                            <input type="number" id="input-prix-max"
+                                class="form-control form-control-sm"
+                                placeholder="Max" min="0" step="0.50">
+                        </div>
+                        <button id="btn-prix" class="btn btn-warning btn-sm w-100">
+                            Filtrer
+                        </button>
+                    </div>
+                </li>
+
+                <!-- 4. Chercher par id -->
+                <li class="nav-item dropdown">
+                    <button class="btn btn-outline-success btn-sm dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-hash me-1"></i>Par id
+                    </button>
+                    <div class="dropdown-menu p-3" style="min-width: 240px;">
+                        <label class="form-label fw-semibold">Identifiant</label>
+                        <input type="number" id="input-id"
+                            class="form-control form-control-sm mb-2"
+                            placeholder="ex: 1, 2, 3..." min="1">
+                        <button id="btn-id" class="btn btn-success btn-sm w-100">
+                            Chercher
+                        </button>
+                    </div>
+                </li>
+
+                <!-- 5. Chercher par nom -->
+                <li class="nav-item dropdown">
+                    <button class="btn btn-outline-danger btn-sm dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-fonts me-1"></i>Par nom
+                    </button>
+                    <div class="dropdown-menu p-3" style="min-width: 260px;">
+                        <label class="form-label fw-semibold">Nom du cocktail</label>
+                        <input type="text" id="input-nom"
+                            class="form-control form-control-sm mb-2"
+                            placeholder="ex: Zombie, Paloma...">
+                        <button id="btn-nom" class="btn btn-danger btn-sm w-100">
+                            Chercher
+                        </button>
+                    </div>
+                </li>
+
+                <!-- 6. Trier par -->
+                <li class="nav-item">
+                    <select id="select-tri" class="form-select form-select-sm">
+                        <option value="" disabled selected>Trier par...</option>
+                        <option value="nom-asc">Nom (A → Z)</option>
+                        <option value="nom-desc">Nom (Z → A)</option>
+                        <option value="prix-asc">Prix (bas → élevé)</option>
+                        <option value="prix-desc">Prix (élevé → bas)</option>
+                        <option value="id-asc">ID (croissant)</option>
+                    </select>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+     <!-- EN-TÊTE -->
+    
+<header class="text-center py-4 bg-light border-bottom">
+    <h1 class="display-6 fw-bold">
+        <i class="bi bi-cup-straw text-dark me-2"></i>Gestion des Cocktails
+    </h1>
+    <p class="text-muted mb-0">Explorez notre catalogue de cocktails</p>
+</header>
+
+
+     <!-- CONTENU PRINCIPAL — GRILLE DE CARDS -->
+     
+<main class="container-fluid py-4 px-4">
+    <div id="conteneur-cocktails" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-4">
+        <!-- Les cards sont injectées ici dynamiquement par affichage.js -->
+        <div class="col-12 text-center py-5">
+            <div class="spinner-border text-secondary" role="status"></div>
+            <p class="text-muted mt-2">Chargement des cocktails...</p>
+        </div>
+    </div>
+</main>
+
+   
+  
+<footer class="text-center text-muted py-3 border-top mt-4">
+    <small>420-931-MA &mdash; Fabiola & Maxence </small>
+</footer>
+
+<!-- Bootstrap JS Bundle -->
+<script src="utilitaires/bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="utilitaires/jquery-3.7.1.min.js"></script>
+
+<script type="module" src="js/app.js"></script>
+
+</body>
+</html>

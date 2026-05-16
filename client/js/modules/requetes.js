@@ -1,11 +1,7 @@
-// Module requetes.js — Requêtes fetch vers le serveur Node/Express
- 
-/**
- * Récupère la liste complète des cocktails depuis l'API
- * @returns {Promise<Array>} tableau d'objets cocktail (données brutes JSON)
- */
-export const obtenirCocktails = async () => {
-    const reponse = await fetch('/cocktails');
+
+// Récupérer tous les cocktails
+export const listerCocktails = async () => {
+    const reponse = await fetch("/cocktails");
+    if (!reponse.ok) throw new Error("Erreur lors de la récupération des cocktails.");
     return await reponse.json();
 };
- 
