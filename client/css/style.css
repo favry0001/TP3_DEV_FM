@@ -1,0 +1,127 @@
+/* Variables de couleurs pour un thème cohérent */
+:root {
+    --bourgogne: #800020;
+    --brun-fonce: #3e2723;
+    --brun-pale: #f5efe6;
+    --blanc: #ffffff;
+    --ombre: rgba(0, 0, 0, 0.1);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--brun-pale);
+    color: var(--brun-fonce);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* NAV Bar ── */
+.barre-navigation {
+    background-color: #921414;
+    border: 15px solid #78171786;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px var(--ombre);
+}
+
+/*  Boutons   */
+.btn {
+    border-radius: 8px;
+    font-size: 0.99rem;
+    font-weight: 500;
+    
+    transition: opacity 0.2s ease, transform 0.15s ease;
+
+}
+
+.barre-navigation .btn {
+    background-color: #ffc107; 
+    border-color: #ffc107;
+    color: #000; 
+}
+
+.barre-navigation .btn:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn:hover {
+    opacity: 0.88;
+    transform: translateY(-1px);
+}
+
+.btn-warning {
+    color: var(--brun-fonce);
+}
+
+/* ── Zone de saisie── */
+#zoneSaisie .card {
+    border: 1px solid #7b0e0e9c;
+    border-radius: 8px;
+    background-color: var(--blanc);
+}
+
+
+
+.card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--ombre);
+    background-color: var(--blanc);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ── IMAGE ── */
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-bottom: 2px solid var(--brun-pale);
+    display: block;
+    width: 100%;
+}
+
+/* Body */
+.card-body {
+    padding: 0.9rem 1rem 1rem;
+}
+
+.card-title {
+    color: var(--bourgogne);
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+}
+
+.card-text {
+    font-size: 0.82rem;
+    margin-bottom: 0.25rem;
+    color: var(--brun-fonce);
+}
+
+.card-text.prix {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--bourgogne);
+    margin-top: 0.3rem;
+}
+
+.card-text.ingredients {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ── RESPONSIVEe ── */
+@media (max-width: 768px) {
+    .barre-navigation { gap: 8px !important; }
+    .btn { width: 100%; }
+    select.form-select { width: 100% !important; }
+}
